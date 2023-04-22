@@ -1,4 +1,8 @@
 const axios = require("axios").default;
+const fs = require('fs');
+const TelegramBot = require('node-telegram-bot-api');
+require('dotenv').config();
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
