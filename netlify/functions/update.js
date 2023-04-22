@@ -17,8 +17,8 @@ const token = process.env.T_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 
-let resultContent = fs.readFileSync('result.txt', 'utf8');
-let textContent = fs.readFileSync('text.txt', 'utf8');
+let resultContent = fs.readFileSync('./../result.txt', 'utf8');
+let textContent = fs.readFileSync('./../text.txt', 'utf8');
 const resultArray = resultContent.split('\n');
 const textArray = textContent.split('\n');
 
