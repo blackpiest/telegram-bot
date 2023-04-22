@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -14,6 +13,7 @@
     "netlify-lambda": "^2.0.16",
     "node-fetch": "^3.3.1",
     "node-telegram-bot-api": "^0.61.0",
+    "telegraf": "^4.12.2",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
