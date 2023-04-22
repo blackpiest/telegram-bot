@@ -18,9 +18,9 @@ bot.on('message', (ctx) => {
     fetch('https://api.thecatapi.com/v1/images/search')
       .then(res => res.json())
       .then(json => {
-        ctx.telegram.sendMessage(chatId, `Это кот, а ${msg.from.first_name} – хороший человек.`);
-        ctx.telegram.sendPhoto(chatId, json[0].url);
-        console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /cat`)
+        // ctx.telegram.sendMessage(chatId, `Это кот, а ${msg.from.first_name} – хороший человек.`);
+        ctx.telegram.sendPhoto(chatId, {url: json[0].url});
+        // console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /cat`)
       })
   }
 });
