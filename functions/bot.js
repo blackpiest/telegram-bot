@@ -1,13 +1,34 @@
 const { Telegraf } = require("telegraf")
-const fs = require('fs');
 const bot = new Telegraf(process.env.T_TOKEN);
 
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 }
-let resultContent = fs.readFileSync('result.txt', 'utf8');
-const resultArray = resultContent.split('\n');
+
+const resultArray = [
+  'Супермен',
+  'Флэш',
+  'Джокер',
+  'Железный-человек',
+  'Человек-паук',
+  'Халк',
+  'Тор',
+  'Чёрная пантера',
+  'Чёрная вдова',
+  'Человек-муравей',
+  'Бэтмен',
+  'Росомаха',
+  'Циклоп',
+  'Вижн',
+  'Алая ведьма',
+  'Соколиный глаз',
+  'Оса',
+  'Зелёный фонарь',
+  'Чёрный Адам',
+  'Шазам',
+  'пидор'
+]
 
 bot.start(ctx => {
   console.log("Received /start command")
