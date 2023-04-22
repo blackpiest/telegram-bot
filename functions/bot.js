@@ -1,6 +1,13 @@
 const { Telegraf } = require("telegraf")
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const bot = new Telegraf(process.env.T_TOKEN)
+const fs = require('fs');
+const bot = new Telegraf(process.env.T_TOKEN);
+
+function randomInteger(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+}
+let resultContent = fs.readFileSync('result.txt', 'utf8');
+const resultArray = resultContent.split('\n');
 
 bot.start(ctx => {
   console.log("Received /start command")
@@ -15,15 +22,11 @@ bot.start(ctx => {
 bot.on('message', (ctx) => {
   const chatId = ctx.message.chat.id;
   if (ctx.message.text.includes('/cat')) {
-        ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня котиков не будет. Бот уехал в Балашиху.`);
+    ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня котиков не будет. Бот уехал в Балашиху.`);
+  }
 
-    // fetch('https://api.thecatapi.com/v1/images/search')
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     // ctx.telegram.sendMessage(chatId, `Это кот, а ${msg.from.first_name} – хороший человек.`);
-    //     ctx.telegram.sendPhoto(chatId, {url: json[0].url});
-    //     // console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /cat`)
-    //   })
+  if (ctx.message.text.includes('/who')) {
+    ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
   }
 });
 
