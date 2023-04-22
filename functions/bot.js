@@ -12,7 +12,7 @@ bot.start(ctx => {
   }
 })
 
-bot.on('text', (ctx) => {
+bot.on('message', (ctx) => {
   const chatId = ctx.message.chat.id;
   if (ctx.message.text.includes('/cat')) {
     fetch('https://api.thecatapi.com/v1/images/search')
