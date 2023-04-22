@@ -69,25 +69,25 @@ exports.handler = async (event) => {
   //   text: "I got your message!",
   // });
 
-  bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    if (msg.text.includes('/who')) {
-      const result = `${msg.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`
-      bot.sendMessage(chatId, result);
-      console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /who`)
-    }
+  // bot.on('message', (msg) => {
+  //   const chatId = msg.chat.id;
+  //   if (msg.text.includes('/who')) {
+  //     const result = `${msg.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`
+  //     bot.sendMessage(chatId, result);
+  //     console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /who`)
+  //   }
 
-    if (msg.text.includes('/cat')) {
-      fetch('https://api.thecatapi.com/v1/images/search')
-        .then(res => res.json())
-        .then(json => {
-          bot.sendMessage(chatId, `Это кот, а ${msg.from.first_name} – ${textArray[randomInteger(0, textArray.length - 1)]}`);
-          bot.sendPhoto(chatId, json[0].url);
-          console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /cat`)
+  //   if (msg.text.includes('/cat')) {
+  //     fetch('https://api.thecatapi.com/v1/images/search')
+  //       .then(res => res.json())
+  //       .then(json => {
+  //         bot.sendMessage(chatId, `Это кот, а ${msg.from.first_name} – ${textArray[randomInteger(0, textArray.length - 1)]}`);
+  //         bot.sendPhoto(chatId, json[0].url);
+  //         console.log(`${getDate()} :: Chat: ${msg.chat.id} :: User: ${msg.from.id} ${msg.from.username} :: использует команду: /cat`)
 
-        })
-    }
-  });
+  //       })
+  //   }
+  // });
 
-  // return { statusCode: 200 };
+  return { statusCode: 200 };
 };
