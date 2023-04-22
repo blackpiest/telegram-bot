@@ -1,5 +1,5 @@
-const axios = require("axios").default;
-const fs = require('fs');
+// const axios = require("axios").default;
+// const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -17,10 +17,49 @@ const token = process.env.T_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 
-let resultContent = fs.readFileSync('./../result.txt', 'utf8');
-let textContent = fs.readFileSync('./../text.txt', 'utf8');
-const resultArray = resultContent.split('\n');
-const textArray = textContent.split('\n');
+// let resultContent = fs.readFileSync('./../result.txt', 'utf8');
+// let textContent = fs.readFileSync('./../text.txt', 'utf8');
+// const resultArray = resultContent.split('\n');
+// const textArray = textContent.split('\n');
+
+const resultArray = [
+  'Супермен',
+  'Флэш',
+  'Джокер',
+  'Железный-человек',
+  'Человек-паук',
+  'Халк',
+  'Тор',
+  'Чёрная пантера',
+  'Чёрная вдова',
+  'Человек-муравей',
+  'Бэтмен',
+  'Росомаха',
+  'Циклоп',
+  'Вижн',
+  'Алая ведьма',
+  'Соколиный глаз',
+  'Оса',
+  'Зелёный фонарь',
+  'Чёрный Адам',
+  'Шазам',
+];
+const textArray = [
+  'петух',
+  'чёрт',
+  'стас',
+  'говно',
+  'олень',
+  'лох',
+  'неудачник',
+  'козёл',
+  'мудак',
+  'нехороший человек',
+  'придурок',
+  'душа компании',
+  'душнила',
+  'сучка',
+];
 
 exports.handler = async (event) => {
   console.log("Received an update from Telegram!", event.body);
