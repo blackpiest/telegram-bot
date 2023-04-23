@@ -30,15 +30,15 @@ const resultArray = [
   'пидор'
 ]
 
-bot.start(ctx => {
-  console.log("Received /start command")
-  try {
-    return ctx.reply("Hi")
-  } catch (e) {
-    console.error("error in start action:", e)
-    return ctx.reply("Error occured")
-  }
-})
+// bot.start(ctx => {
+//   console.log("Received /start command")
+//   try {
+//     return ctx.reply("Привет!")
+//   } catch (e) {
+//     console.error("error in start action:", e)
+//     return ctx.reply("Error occured")
+//   }
+// })
 
 bot.on('message', (ctx) => {
   const chatId = ctx.message.chat.id;
@@ -50,6 +50,8 @@ bot.on('message', (ctx) => {
     ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
   }
 });
+
+bot.launch();
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async event => {
