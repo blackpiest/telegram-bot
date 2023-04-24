@@ -13,27 +13,27 @@ const resultArray = [
   'Не бот'
 ];
 
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
 
-  if (msg.text.includes('/start')) {
-    bot.sendMessage(chatId, 'Привет! Я готов работать');
-  }
-
-  if (msg.text.includes('/cat')) {
-    bot.sendMessage(chatId, `${msg.from.first_name}, сегодня котиков не будет. Бот расширяет базу.`);
-  }
-  if (msg.text.includes('/who')) {
-    bot.sendMessage(chatId, `${msg.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
-  }
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
-});
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async event => {
   try {
-    // await bot.handleUpdate(JSON.parse(event.body))
+    bot.on('message', (msg) => {
+      const chatId = msg.chat.id;
+
+      if (msg.text.includes('/start')) {
+        bot.sendMessage(chatId, 'Привет! Я готов работать');
+      }
+
+      if (msg.text.includes('/cat')) {
+        bot.sendMessage(chatId, `${msg.from.first_name}, сегодня котиков не будет. Бот расширяет базу.`);
+      }
+      if (msg.text.includes('/who')) {
+        bot.sendMessage(chatId, `${msg.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
+      }
+      // send a message to the chat acknowledging receipt of their message
+      bot.sendMessage(chatId, 'Received your message');
+    });
     return { statusCode: 200, body: "" }
   } catch (e) {
     console.error("error in handler:", e)
