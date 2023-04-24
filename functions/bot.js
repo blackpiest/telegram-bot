@@ -1,5 +1,7 @@
-const { Telegraf } = require("telegraf")
-const bot = new Telegraf(process.env.T_TOKEN);
+const TelegramBot = require('node-telegram-bot-api');
+
+const token = process.env.T_TOKEN;
+const bot = new TelegramBot(token, { polling: true });
 
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
@@ -9,33 +11,29 @@ function randomInteger(min, max) {
 const resultArray = [
   'Бот',
   'Не бот'
-]
+];
 
-bot.start(ctx => {
-  console.log("Received /start command")
-  try {
-    return ctx.reply("Привет!")
-  } catch (e) {
-    console.error("error in start action:", e)
-    return ctx.reply("Error occured")
-  }
-})
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
 
-bot.on('message', (ctx) => {
-  const chatId = ctx.message.chat.id;
-  if (ctx.message.text.includes('/cat')) {
-    ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня котиков не будет. Бот расширяет базу.`);
+  if (msg.text.includes('/start')) {
+    bot.sendMessage(chatId, 'Привет! Я готов работать');
   }
 
-  if (ctx.message.text.includes('/who')) {
-    ctx.telegram.sendMessage(chatId, `${ctx.message.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
+  if (msg.text.includes('/cat')) {
+    bot.sendMessage(chatId, `${msg.from.first_name}, сегодня котиков не будет. Бот расширяет базу.`);
   }
+  if (msg.text.includes('/who')) {
+    bot.sendMessage(chatId, `${msg.from.first_name}, сегодня ты – ${resultArray[randomInteger(0, resultArray.length - 1)]}`);
+  }
+  // send a message to the chat acknowledging receipt of their message
+  bot.sendMessage(chatId, 'Received your message');
 });
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async event => {
   try {
-    await bot.handleUpdate(JSON.parse(event.body))
+    // await bot.handleUpdate(JSON.parse(event.body))
     return { statusCode: 200, body: "" }
   } catch (e) {
     console.error("error in handler:", e)
